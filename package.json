@@ -15,7 +15,7 @@
     "prod": "npm run build && npm run server",
     "dev": "concurrently \"npm run frontend\" \"npm run server\"",
     "build": "cd frontend && npm run build && cd ..",
-    "server": "node src/server.js",
+    "server": "nodemon src/server.js",
     "frontend": "cd frontend && npm start",
     "linter": "npx eslint src/"
   },
@@ -40,6 +40,9 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "jshint": "^2.13.0"
+    "nodemon": "^2.0.12"
+  },
+  "nodemonConfig": {
+    "ext": "*.js,*.jsx,*.json,*.ts,*.tsx"
   }
 }

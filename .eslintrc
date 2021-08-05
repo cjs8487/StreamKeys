@@ -4,7 +4,12 @@
     "overrides": [
         {
             "files": [
-                "src/**/*.js"
+                "src/**/*.js",
+                "src/**/*.ts",
+                "frontend/src/**/*.js",
+                "frontend/src/**/*.jsx",
+                "frontend/src/**/*.ts",
+                "frontend/src/**/*.tsx"
             ],
             "rules": {
                 "indent": ["error", 4],
