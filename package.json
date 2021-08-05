@@ -1,0 +1,25 @@
+{
+  "name": "streamkeys",
+  "version": "0.0.1",
+  "description": "A cross-platform virtual control deck for content creators",
+  "private": true,
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "CJ Schaefer"
+  },
+  "contributors": [],
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^6.2.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.23.4"
+  }
+}
