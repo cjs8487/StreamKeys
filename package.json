@@ -1,53 +1,53 @@
 {
-  "name": "streamkeys",
-  "version": "0.0.1",
-  "description": "A cross-platform virtual control deck for content creators",
-  "private": true,
-  "main": "src/server.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run version && npm run update && npm run prod",
-    "version": "echo 'Node Version:' && node -v && echo 'npm Version:' && npm -v",
-    "deploy": "cross-env REACT_APP_PORT=80 PORT=80 npm run prod",
-    "dependencies": "npx depcheck",
-    "hard-update": "rm package-lock.json && rm -rf node_modules/ && cd frontend && rm package-lock.json && rm -rf node_modules/ && cd .. && npm run update",
-    "update": "npm install && cd frontend && npm install && cd ..",
-    "prod": "npm run build && npm run server",
-    "dev": "concurrently \"npm run frontend\" \"npm run server\"",
-    "build": "cd frontend && npm run build && cd ..",
-    "server": "nodemon src/server.ts",
-    "frontend": "cd frontend && npm start",
-    "linter": "npx eslint src/"
-  },
-  "author": {
-    "name": "CJ Schaefer"
-  },
-  "contributors": [],
-  "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "concurrently": "^6.2.0",
-    "express": "^4.17.1",
-    "obs-websocket-js": "^4.0.2",
-    "serialport": "^9.2.0"
-  },
-  "devDependencies": {
-    "@types/express": "^4.17.13",
-    "@types/serialport": "^8.0.2",
-    "babel-eslint": "^10.1.0",
-    "cross-env": "^7.0.3",
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-plugin-import": "^2.23.4",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.24.0",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "nodemon": "^2.0.12",
-    "ts-node": "^10.1.0",
-    "typescript": "^4.3.5"
-  },
-  "nodemonConfig": {
-    "ext": "*.js,*.jsx,*.json,*.ts,*.tsx",
-    "ignore": "./frontend/*"
-  }
+    "name": "streamkeys",
+    "version": "0.0.1",
+    "description": "A cross-platform virtual control deck for content creators",
+    "private": true,
+    "main": "src/server.ts",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "npm run version && npm run update && npm run prod",
+        "version": "echo 'Node Version:' && node -v && echo 'npm Version:' && npm -v",
+        "deploy": "cross-env REACT_APP_PORT=80 PORT=80 npm run prod",
+        "dependencies": "npx depcheck",
+        "hard-update": "rm package-lock.json && rm -rf node_modules/ && cd frontend && rm package-lock.json && rm -rf node_modules/ && cd .. && npm run update",
+        "update": "npm install && cd frontend && npm install && cd ..",
+        "prod": "npm run build && npm run server",
+        "dev": "concurrently \"npm run frontend\" \"npm run server\"",
+        "build": "cd frontend && npm run build && cd ..",
+        "server": "nodemon src/server.ts",
+        "frontend": "cd frontend && npm start",
+        "linter": "npx eslint src/"
+    },
+    "author": {
+        "name": "CJ Schaefer"
+    },
+    "contributors": [],
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "concurrently": "^6.2.0",
+        "express": "^4.17.1",
+        "obs-websocket-js": "^4.0.2",
+        "serialport": "^9.2.0"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.13",
+        "@types/serialport": "^8.0.2",
+        "babel-eslint": "^10.1.0",
+        "cross-env": "^7.0.3",
+        "eslint": "^7.32.0",
+        "eslint-config-airbnb": "^18.2.1",
+        "eslint-plugin-import": "^2.23.4",
+        "eslint-plugin-jsx-a11y": "^6.4.1",
+        "eslint-plugin-react": "^7.24.0",
+        "eslint-plugin-react-hooks": "^4.2.0",
+        "nodemon": "^2.0.12",
+        "ts-node": "^10.1.0",
+        "typescript": "^4.3.5"
+    },
+    "nodemonConfig": {
+        "ext": "*.js,*.jsx,*.json,*.ts,*.tsx",
+        "ignore": "./frontend/*"
+    }
 }
