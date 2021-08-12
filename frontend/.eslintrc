@@ -1,0 +1,26 @@
+{
+    "overrides": [
+        {
+            "files": [
+                "src/**/*.js",
+                "src/**/*.jsx",
+                "src/**/*.ts",
+                "src/**/*.tsx"
+            ],
+            "rules": {
+                "react/jsx-indent": ["error", 4],
+                "react/jsx-indent-props": ["error", 4],
+                "react/jsx-filename-extension": ["error", {"extensions": [".jsx", ".tsx"]}],
+                "react/jsx-curly-newline": ["error", {
+                    "singleline": "forbid",
+                    "multiline": "require"
+                }],
+                "react/prefer-stateless-function": ["off"],
+            }
+        }
+    ],
+    "env": {
+        "browser": true,
+        "jest": true
+    }
+}
