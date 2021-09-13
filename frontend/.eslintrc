@@ -15,7 +15,7 @@
                     "singleline": "forbid",
                     "multiline": "require"
                 }],
-                "react/prefer-stateless-function": ["off"],
+                "react/prefer-stateless-function": ["off"]
             }
         }
     ],

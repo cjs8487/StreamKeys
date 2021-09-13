@@ -45,7 +45,6 @@ class App extends React.Component<AppProps, AppState> {
 
     render() {
         const { sceneList } = this.state;
-        console.log(sceneList);
         return (
             <div className="App">
                 <ul>

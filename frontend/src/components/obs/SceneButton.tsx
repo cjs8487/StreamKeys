@@ -19,9 +19,9 @@ class SceneButton extends React.Component < SceneButtonProps, {} > {
     render() {
         const { sceneName } = this.props;
         return (
-            <button type="button" onClick={this.handleClick}>
+            <div role="button" onClick={this.handleClick} onKeyDown={this.handleClick} tabIndex={0}>
                 {`${sceneName}`}
-            </button>
+            </div>
         );
     }
 }
