@@ -3,6 +3,7 @@ import React from 'react';
 
 import OBSWebSocket, { Scene } from 'obs-websocket-js';
 import SceneButton from './components/obs/SceneButton';
+import SerialController from './components/serial/SerialController';
 
 type AppProps = {}
 type AppState = {
@@ -56,6 +57,7 @@ class App extends React.Component<AppProps, AppState> {
                         ))
                     }
                 </ul>
+                <SerialController />
             </div>
         );
     }

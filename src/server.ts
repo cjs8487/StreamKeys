@@ -4,6 +4,7 @@ import SerialPort from 'serialport';
 const express = require('express');
 const path = require('path');
 const Serial = require('serialport');
+const cors = require('cors');
 
 const server = express();
 
@@ -11,14 +12,31 @@ const buildPath = '../frontend/build';
 const port = 3030;
 
 server.use(express.json());
+server.use(cors());
 
 server.get('/ping', (req: Request, res: Response) => {
     res.status(200).send('Pong');
 });
 
-const serialPort: SerialPort = new Serial('COM5');
-serialPort.write('MT00RD0000NT');
-serialPort.read();
+let serialPort: SerialPort;
+server.get('/getports', async (req: Request, res: Response) => {
+    const portsList: Array<string> = [];
+
+    await SerialPort.list().then((ports) => {
+        ports.forEach((serPort) => {
+            portsList.push(serPort.path);
+        });
+    });
+    res.status(200).json({ ports: portsList }).end();
+});
+
+server.post('/connect', (req: Request, res: Response) => {
+    const { comPort } = req.body;
+    console.log(comPort);
+    serialPort = new Serial(comPort);
+    res.status(200).end();
+});
+
 server.get('/serialtest', (req: Request, res: Response) => {
     serialPort.write('MT00RD0000NT');
     console.log('written');
