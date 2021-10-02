@@ -32,7 +32,6 @@ server.get('/getports', async (req: Request, res: Response) => {
 
 server.post('/connect', (req: Request, res: Response) => {
     const { comPort } = req.body;
-    console.log(comPort);
     serialPort = new Serial(comPort);
     res.status(200).end();
 });
@@ -48,26 +47,10 @@ server.post('/disconnect', (req: Request, res: Response) => {
     res.status(409).send('No port open');
 });
 
-server.get('/serialtest', (req: Request, res: Response) => {
-    if (serialPort !== undefined) {
-        serialPort.write('MT00RD0000NT');
-        console.log('written');
-        let ret = serialPort.read();
-        if (ret != null) {
-            ret = ret.toString();
-        }
-        console.log(ret);
-        res.status(200).send(ret);
-        return;
-    }
-    res.status(409).send('No port open');
-});
-
 server.post('/setoutput', (req: Request, res: Response) => {
     if (serialPort !== undefined) {
         const { output, input } = req.body;
         const command = `MT00SW${(`${input}`).padStart(2, '0')}${(`${output}`).padStart(2, '0')}NT`;
-        console.log(command);
         serialPort.write(command);
         serialPort.write('MT00RD0000NT');
         let ret = serialPort.read();
