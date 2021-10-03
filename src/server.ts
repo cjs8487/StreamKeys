@@ -4,6 +4,7 @@ import SerialPort from 'serialport';
 const express = require('express');
 const path = require('path');
 const Serial = require('serialport');
+const Readline = require('@serialport/parser-readline');
 const cors = require('cors');
 
 const server = express();
@@ -61,6 +62,18 @@ server.post('/setoutput', (req: Request, res: Response) => {
         return;
     }
     res.status(409).send('No port open');
+});
+
+server.get('/status', (req: Request, res: Response) => {
+    if (serialPort === undefined) {
+        res.status(409).send('No port open');
+        return;
+    }
+    serialPort.write('MT00RD0000NT');
+    const parser = serialPort.pipe(new Readline({ delimiter: 'END' }));
+    parser.on('data', (data: Buffer) => {
+        res.status(200).send(data);
+    });
 });
 
 // default to returning the production build of the frontend files
