@@ -9,6 +9,7 @@ type SerialControllerState = {
     ports: Array<string>,
     selectedPort: string,
     statusText: string,
+    outputMap: Array<number>
 }
 
 class SerialController extends React.Component<SerialControllerProps, SerialControllerState> {
@@ -18,6 +19,7 @@ class SerialController extends React.Component<SerialControllerProps, SerialCont
             ports: [],
             selectedPort: '',
             statusText: 'loading',
+            outputMap: [],
         };
         this.portSelect = this.portSelect.bind(this);
         this.connect = this.connect.bind(this);
@@ -47,18 +49,35 @@ class SerialController extends React.Component<SerialControllerProps, SerialCont
         this.setState({ selectedPort: value });
     }
 
-    connect() {
+    async connect() {
         const { selectedPort } = this.state;
         const options = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ comPort: selectedPort }),
         };
-        fetch('http://localhost:3030/connect', options);
+        await fetch('http://localhost:3030/connect', options);
+        this.status();
+    }
+
+    async status() {
+        let status = await (await fetch('http://localhost:3030/status')).text();
+        const matches = Array.from(status.matchAll(/(O(?<output>.))(I(?<input>.))/g));
+        const outputMap: Array<number> = [];
+        matches.forEach((match) => {
+            console.log(match);
+            if (match.groups !== undefined) {
+                outputMap[Number.parseInt(match.groups.output, 10)] = Number.parseInt(match.groups.input, 10);
+            } else {
+                status = 'Received invalid status syntx from server';
+            }
+        });
+        console.log(matches);
+        this.setState({ statusText: status, outputMap });
     }
 
     render() {
-        const { ports, selectedPort, statusText } = this.state;
+        const { ports, selectedPort, statusText, outputMap } = this.state;
         if (ports === []) {
             return (
                 <div />
@@ -78,6 +97,16 @@ class SerialController extends React.Component<SerialControllerProps, SerialCont
                     selectedPort !== '' && (
                         <button type="submit" onClick={this.connect}>Connect</button>
                     )
+                }
+                {
+                    outputMap !== [] && outputMap.map((input, output) => (
+                        <p>
+                            Output
+                            {output}
+                            displaying input
+                            {input}
+                        </p>
+                    ))
                 }
             </div>
         );
