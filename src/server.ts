@@ -20,16 +20,16 @@ server.get('/ping', (req: Request, res: Response) => {
 });
 
 let serialPort: SerialPort | undefined;
+let parser;
 let status: Buffer;
 let statusUpdated: boolean;
 
 function updateStatus() {
     if (serialPort !== undefined) {
         statusUpdated = false;
-        const parser = serialPort.pipe(new Readline({ delimiter: 'END' }));
+        parser = serialPort.pipe(new Readline({ delimiter: 'END' }));
         serialPort.write('MT00RD0000NT');
         parser.on('data', (data: Buffer) => {
-            console.log(data);
             status = data;
             statusUpdated = true;
         });
