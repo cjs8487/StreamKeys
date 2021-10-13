@@ -20,14 +20,13 @@ server.get('/ping', (req: Request, res: Response) => {
 });
 
 let serialPort: SerialPort | undefined;
-let parser;
+let parser: any;
 let status: Buffer;
 let statusUpdated: boolean;
 
 function updateStatus() {
     if (serialPort !== undefined) {
         statusUpdated = false;
-        parser = serialPort.pipe(new Readline({ delimiter: 'END' }));
         serialPort.write('MT00RD0000NT');
         parser.on('data', (data: Buffer) => {
             status = data;
@@ -50,6 +49,9 @@ server.get('/getports', async (req: Request, res: Response) => {
 server.post('/connect', (req: Request, res: Response) => {
     const { comPort } = req.body;
     serialPort = new Serial(comPort);
+    if (serialPort !== undefined) {
+        parser = serialPort.pipe(new Readline({ delimiter: 'END' }));
+    }
     res.status(200).end();
     updateStatus();
 });
