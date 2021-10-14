@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
+        "fetch-retry": "^5.0.1",
         "lodash": "^4.17.21",
         "obs-websocket-js": "^4.0.2",
         "react": "^17.0.2",
