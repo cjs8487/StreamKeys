@@ -82,9 +82,11 @@ server.post('/setoutput', (req: Request, res: Response) => {
 server.get('/status', (req: Request, res: Response) => {
     if (serialPort === undefined) {
         res.status(409).send('No port open');
+        return;
     }
     if (!statusUpdated) {
         res.status(409).send('Status update pending');
+        return;
     }
     res.status(200).send(status);
 });
